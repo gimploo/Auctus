@@ -10,6 +10,7 @@ public class ButtonHandler : MonoBehaviour
     ARSessionOrigin arOrigin;
     private PlaneSet planeSetScript;
     public Button resetButton;
+    public Button MovePhonePrompt;
 
     private void Awake()
     {
@@ -27,6 +28,12 @@ public class ButtonHandler : MonoBehaviour
             resetButton.interactable = true;
             resetButton.enabled = true;
             resetButton.gameObject.SetActive(true);
+        }
+
+        if (!planeSetScript.isSetValidPose()) {
+            MovePhonePrompt.gameObject.SetActive(true);
+        } else {
+            MovePhonePrompt.gameObject.SetActive(false);
         }
     }
 }

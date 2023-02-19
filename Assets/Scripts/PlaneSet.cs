@@ -32,6 +32,11 @@ public class PlaneSet : MonoBehaviour
         return isPermanentlySetPose;
     }
 
+    public bool isSetValidPose()
+    {
+        return placementPoseIsValid;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -81,6 +86,7 @@ public class PlaneSet : MonoBehaviour
             placementPose.rotation = Quaternion.LookRotation(cameraBearing);
         }
     }
+
 
     private void updatePlacementIndicator()
     {
