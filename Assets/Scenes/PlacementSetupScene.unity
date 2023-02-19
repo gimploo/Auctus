@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9078649bc632343a05a6c9fe2d2ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1209522697}
+  prefab: {fileID: 83246582}
 --- !u!114 &67125919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 0}
   m_DetectionMode: 1
+--- !u!1 &83246582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 620853186581345018, guid: 99ca994033deeac4f84afc9bebcfed23,
+    type: 3}
+  m_PrefabInstance: {fileID: 1209522696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &295043156
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +493,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &295043160
 MonoBehaviour:
@@ -573,7 +579,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &743943588
 GameObject:
@@ -732,7 +738,7 @@ RectTransform:
   - {fileID: 1411062242}
   - {fileID: 978446439}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -753,7 +759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arOrigin: {fileID: 67125915}
   resetButton: {fileID: 1965958033}
-  submitButton: {fileID: 0}
+  submitButton: {fileID: 978446440}
   MovePhonePrompt: {fileID: 1411062239}
 --- !u!1 &978446438
 GameObject:
@@ -904,7 +910,7 @@ PrefabInstance:
     - target: {fileID: 1819068815971737196, guid: 99ca994033deeac4f84afc9bebcfed23,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1819068815971737196, guid: 99ca994033deeac4f84afc9bebcfed23,
         type: 3}
@@ -958,12 +964,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99ca994033deeac4f84afc9bebcfed23, type: 3}
---- !u!1 &1209522697 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 620853186581345018, guid: 99ca994033deeac4f84afc9bebcfed23,
-    type: 3}
-  m_PrefabInstance: {fileID: 1209522696}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1411062238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,7 +1084,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 271.3, y: 30}
+  m_SizeDelta: {x: 338.4, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1750961822
 GameObject:
@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move phone to start
+  m_text: finding a flat surface ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
