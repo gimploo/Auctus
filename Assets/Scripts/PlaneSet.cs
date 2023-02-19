@@ -21,6 +21,17 @@ public class PlaneSet : MonoBehaviour
         arRaycastManager = GetComponent<ARRaycastManager>();
     }
 
+    public void resetPlacementPose()
+    {
+        isPermanentlySetPose = false;
+        EnhancedTouch.Touch.onFingerDown += FingerDownSetPlane;
+    }
+
+    public bool getIsPermanentlySetPose()
+    {
+        return isPermanentlySetPose;
+    }
+
     // Update is called once per frame
     void Update()
     {
