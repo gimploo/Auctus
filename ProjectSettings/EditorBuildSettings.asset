@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/ExampleAssets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/PlaceObject.unity
+    path: Assets/Scenes/PlacementSetupScene.unity
     guid: 47a8c5554734de24fbe6292095291132
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,

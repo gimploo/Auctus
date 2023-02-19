@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonHandler : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ButtonHandler : MonoBehaviour
     ARSessionOrigin arOrigin;
     private PlaneSet planeSetScript;
     public Button resetButton;
+    public Button submitButton;
     public Button MovePhonePrompt;
 
     private void Awake()
@@ -24,10 +26,16 @@ public class ButtonHandler : MonoBehaviour
             resetButton.enabled = false;
             resetButton.interactable = false;
             resetButton.gameObject.SetActive(false);
+            submitButton.enabled = false;
+            submitButton.interactable = false;
+            submitButton.gameObject.SetActive(false);
         } else {
             resetButton.interactable = true;
             resetButton.enabled = true;
             resetButton.gameObject.SetActive(true);
+            submitButton.interactable = true;
+            submitButton.enabled = true;
+            submitButton.gameObject.SetActive(true);
         }
 
         if (!planeSetScript.isSetValidPose()) {
@@ -35,5 +43,10 @@ public class ButtonHandler : MonoBehaviour
         } else {
             MovePhonePrompt.gameObject.SetActive(false);
         }
+    }
+
+    public void onSubmit()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 }
