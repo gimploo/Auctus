@@ -9,14 +9,14 @@ public class ButtonHandler : MonoBehaviour
 {
     [SerializeField]
     ARSessionOrigin arOrigin;
-    private PlaneSet planeSetScript;
+    private AuctusBaseConfig planeSetScript;
     public Button resetButton;
     public Button submitButton;
     public Button MovePhonePrompt;
 
     private void Awake()
     {
-        planeSetScript = arOrigin.GetComponent<PlaneSet>();
+        planeSetScript = arOrigin.GetComponent<AuctusBaseConfig>();
     }
 
     // Update is called once per frame

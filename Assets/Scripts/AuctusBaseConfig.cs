@@ -5,7 +5,7 @@ using UnityEngine.XR.ARSubsystems;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 
 [RequireComponent(typeof(ARRaycastManager))]
-public class PlaneSet : MonoBehaviour
+public class AuctusBaseConfig : MonoBehaviour
 {
     [SerializeField]
     private GameObject prefab;
@@ -16,8 +16,17 @@ public class PlaneSet : MonoBehaviour
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
     private bool isPermanentlySetPose = false;
 
+    public static AuctusBaseConfig Instance;
+
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
         arRaycastManager = GetComponent<ARRaycastManager>();
     }
 
