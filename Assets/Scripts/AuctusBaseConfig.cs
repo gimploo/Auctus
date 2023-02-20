@@ -10,7 +10,7 @@ public class AuctusBaseConfig : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
     private ARRaycastManager arRaycastManager;
-    private Pose placementPose;
+    public Pose placementPose;
     private bool placementPoseIsValid = false;
 
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
