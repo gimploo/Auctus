@@ -21,12 +21,20 @@ public class Stack : MonoBehaviour
     public void push()
     {
         top = top + 1;
+
         Instantiate(
             prefab, 
             lastPos,
-            AuctusBaseConfig.Instance.placementPose.rotation
+            Quaternion.LookRotation(
+                new Vector3(
+                    Camera.main.transform.forward.x, 
+                    0, 
+                    Camera.main.transform.forward.z
+                ).normalized
+            )
         );
-        lastPos = lastPos + new Vector3(0.0f, 1.0f, 0.0f);
+
+        lastPos = lastPos + new Vector3(0.0f, 0.5f, 0.0f);
     }
 
     public void pop()
