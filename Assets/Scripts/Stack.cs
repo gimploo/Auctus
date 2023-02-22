@@ -33,8 +33,7 @@ public class Stack : MonoBehaviour
                 ).normalized
             )
         );
-
-        lastPos = lastPos + new Vector3(0.0f, 0.5f, 0.0f);
+        lastPos = lastPos + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
     }
 
     public void pop()
