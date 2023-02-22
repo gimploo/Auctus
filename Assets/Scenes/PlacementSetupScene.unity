@@ -1556,9 +1556,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: b4ba52622bb91554b949e84a367e2776, type: 3}
-        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 395751056}
+        m_TargetAssemblyTypeName: Stack, Assembly-CSharp
+        m_MethodName: pop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

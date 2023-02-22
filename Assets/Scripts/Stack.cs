@@ -13,6 +13,8 @@ public class Stack : MonoBehaviour
     private int top = -1;
     private Vector3 lastPos = default;
 
+    List<GameObject> data = new List<GameObject>();
+
     void Start()
     {
         lastPos = AuctusBaseConfig.Instance.placementPose.position;
@@ -22,7 +24,9 @@ public class Stack : MonoBehaviour
     {
         top = top + 1;
 
-        Instantiate(
+        data.Insert(
+            top,
+            Instantiate(
             prefab, 
             lastPos,
             Quaternion.LookRotation(
@@ -32,12 +36,16 @@ public class Stack : MonoBehaviour
                     Camera.main.transform.forward.z
                 ).normalized
             )
-        );
+        ));
         lastPos = lastPos + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
     }
 
     public void pop()
     {
         if (top == -1) return;
+        lastPos = lastPos - new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
+        Destroy(data[top]);
+        data.RemoveAt(top);
+        top = top - 1;
     }
 }
