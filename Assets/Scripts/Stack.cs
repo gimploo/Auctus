@@ -11,7 +11,6 @@ public class Stack : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
     [SerializeField] TMP_InputField cinputText;
-    private TMP_Text displayText = null;
 
     private string val = "";
     private int top = -1;
@@ -34,23 +33,31 @@ public class Stack : MonoBehaviour
         if (val == "" || val == " " ) return;
 
         top = top + 1;
-        // displayText.text = val;
-        data.Insert(
-            top,
-            Instantiate(
-                prefab, 
-                lastPos,
-                Quaternion.LookRotation(
-                    new Vector3(
-                        Camera.main.transform.forward.x, 
-                        0, 
-                        Camera.main.transform.forward.z
-                    ).normalized
-                )
+        GameObject newobj = Instantiate(
+            prefab, 
+            lastPos,
+            Quaternion.LookRotation(
+                new Vector3(
+                    Camera.main.transform.forward.x, 
+                    0, 
+                    Camera.main.transform.forward.z
+                ).normalized
             )
         );
-        lastPos = lastPos + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
+
+        // sets the text
+        // newobj.transform.Find("Button").gameObject.GetComponentInChildren<Text>().text = val;
+        newobj.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text = val;
+        data.Insert(
+            top,
+            newobj
+        );
+        lastPos = lastPos + new Vector3(0.0f, newobj.transform.localScale.y, 0.0f);
+
+        //clears input field
+        cinputText.Select();
         cinputText.text = "";
+
         val = "";
     }
 
