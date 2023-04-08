@@ -55,9 +55,16 @@ public class Stack : MonoBehaviour
         lastPos = lastPos + new Vector3(0.0f, newobj.transform.localScale.y, 0.0f);
 
         //clears input field
-        cinputText.Select();
-        cinputText.text = "";
+        val = cinputText.text = "";
+    }
 
+    public void reset()
+    {
+        top = -1;
+        foreach(GameObject obj in data)
+            Destroy(obj);
+        
+        lastPos = AuctusBaseConfig.Instance.placementPose.position;
         val = "";
     }
 

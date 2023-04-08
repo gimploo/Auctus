@@ -10,6 +10,7 @@ using TMPro;
 public class LinkedList : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
+    [SerializeField] GameObject arrowprefab;
     [SerializeField] TMP_InputField cinputText;
 
     private string val = "";
@@ -17,13 +18,14 @@ public class LinkedList : MonoBehaviour
     private Vector3 lastPos = default;
 
     List<GameObject> data = new List<GameObject>();
+    List<GameObject> arrows = new List<GameObject>();
 
     public void updateInputText()
     {
         val = cinputText.text;
     }
 
-    void Start()
+    private void Awake()
     {
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
     }
@@ -44,27 +46,48 @@ public class LinkedList : MonoBehaviour
         return -1;
     }
 
+    public void reset()
+    {
+        foreach(GameObject obj in arrows)
+            Destroy(obj);
+        foreach(GameObject obj in data)
+            Destroy(obj);
+
+        lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
+        top = -1;
+        val = "";
+    }
+
     public void insertion()
     {
         if (val == "" || val == " " ) return;
 
         top = top + 1;
-        GameObject newobj = Instantiate(
+        GameObject obj1 = Instantiate(
             prefab, 
             lastPos,
             Quaternion.identity
         );
 
         // sets the text
-        newobj.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text = val;
+        obj1.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text = val;
         data.Insert(
             top,
-            newobj
+            obj1
         );
-        lastPos = lastPos + new Vector3(newobj.transform.localScale.x, 0.0f, 0.0f);
+        lastPos = lastPos + new Vector3(obj1.transform.localScale.x, 0.0f, 0.0f);
+        GameObject obj2 = Instantiate(
+            arrowprefab, 
+            lastPos,
+            Quaternion.identity
+        );
+        arrows.Insert(
+            top,
+            obj2
+        );
+        lastPos = lastPos + new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f);
 
         //clears input field
-        cinputText.Select();
         cinputText.text = "";
 
         val = "";
@@ -73,9 +96,11 @@ public class LinkedList : MonoBehaviour
     public void deletion()
     {
         if (top == -1) return;
-        lastPos = lastPos - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
+        lastPos = lastPos - new Vector3(arrowprefab.transform.localScale.x, 0.0f, 0.0f) - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
         Destroy(data[top]);
+        Destroy(arrows[top]);
         data.RemoveAt(top);
+        arrows.RemoveAt(top);
         top = top - 1;
     }
 }
