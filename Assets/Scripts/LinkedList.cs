@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 using TMPro;
 
 public class LinkedList : MonoBehaviour
@@ -20,6 +19,8 @@ public class LinkedList : MonoBehaviour
     List<GameObject> data = new List<GameObject>();
     List<GameObject> arrows = new List<GameObject>();
 
+    private GameObject lastSelectedNode = null;
+
     public void updateInputText()
     {
         val = cinputText.text;
@@ -29,7 +30,6 @@ public class LinkedList : MonoBehaviour
     {
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
     }
-
     private GameObject getReferenceToGameObjectFromTouch()
     {
         //TODO: raycast code
@@ -56,6 +56,31 @@ public class LinkedList : MonoBehaviour
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
         top = -1;
         val = "";
+    }
+
+    void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began) {
+
+                Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                RaycastHit hitObject;
+                if (Physics.Raycast(ray, out hitObject)) {
+
+                    if (lastSelectedNode != null) {
+                        lastSelectedNode.GetComponent<Renderer>().material.color = prefab.GetComponent<Renderer>().material.color;
+                    }
+
+                    GameObject obj = hitObject.transform.gameObject;
+                    if (obj.tag == "node") {
+                        lastSelectedNode = obj;
+                        obj.GetComponent<Renderer>().material.color = Color.blue;
+                    } 
+                }
+            }
+        }
     }
 
     public void insertion()
