@@ -30,11 +30,6 @@ public class LinkedList : MonoBehaviour
     {
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
     }
-    private GameObject getReferenceToGameObjectFromTouch()
-    {
-        //TODO: raycast code
-        return null;
-    }
 
     private int getIndexOfGameObjectFromList(GameObject target)
     {
@@ -75,6 +70,11 @@ public class LinkedList : MonoBehaviour
 
                     GameObject obj = hitObject.transform.gameObject;
                     if (obj.tag == "node") {
+                        if (obj == lastSelectedNode) {
+                            lastSelectedNode.GetComponent<Renderer>().material.color = prefab.GetComponent<Renderer>().material.color;
+                            lastSelectedNode = null;
+                            return;
+                        }
                         lastSelectedNode = obj;
                         obj.GetComponent<Renderer>().material.color = Color.blue;
                     } 
@@ -83,9 +83,59 @@ public class LinkedList : MonoBehaviour
         }
     }
 
+    private void insert_at_index(int index)
+    {
+        GameObject obj1 = Instantiate(
+            prefab, 
+            data[index].transform.position,
+            Quaternion.identity
+        );
+        obj1.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text = val;
+        GameObject obj2 = Instantiate(
+            arrowprefab, 
+            arrows[index].transform.position,
+            Quaternion.identity
+        );
+
+        for (int i = index; i < (data.Count - 1); i++)
+        {
+            data[i].SetActive(false);
+            arrows[i].SetActive(false);
+            {
+                data[i].transform.position = data[i+1].transform.position;
+                arrows[i].transform.position = arrows[i+1].transform.position;
+            }
+            data[i].SetActive(true);
+            arrows[i].SetActive(true);
+        }
+
+        data.Insert(
+            index,
+            obj1
+        );
+        arrows.Insert(
+            index,
+            obj2
+        );
+
+        data[data.Count - 1].transform.position += new Vector3(obj1.transform.localScale.x, 0.0f, 0.0f);
+        arrows[data.Count - 1].transform.position += new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f);
+
+        lastPos = lastPos + new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f) + new Vector3(obj1.transform.localScale.x, 0.0f, 0.0f);
+        top = top + 1;
+        cinputText.text = "";
+        val = "";
+    }
+
     public void insertion()
     {
         if (val == "" || val == " " ) return;
+
+        if (lastSelectedNode != null) {
+            int index = getIndexOfGameObjectFromList(lastSelectedNode);
+            insert_at_index(index);
+            return;
+        }
 
         top = top + 1;
         GameObject obj1 = Instantiate(
