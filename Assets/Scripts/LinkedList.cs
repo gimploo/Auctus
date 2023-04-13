@@ -99,14 +99,8 @@ public class LinkedList : MonoBehaviour
 
         for (int i = index; i < (data.Count - 1); i++)
         {
-            data[i].SetActive(false);
-            arrows[i].SetActive(false);
-            {
-                data[i].transform.position = data[i+1].transform.position;
-                arrows[i].transform.position = arrows[i+1].transform.position;
-            }
-            data[i].SetActive(true);
-            arrows[i].SetActive(true);
+            data[i].transform.position = data[i+1].transform.position;
+            arrows[i].transform.position = arrows[i+1].transform.position;
         }
 
         data.Insert(
@@ -119,7 +113,7 @@ public class LinkedList : MonoBehaviour
         );
 
         data[data.Count - 1].transform.position += new Vector3(obj1.transform.localScale.x, 0.0f, 0.0f);
-        arrows[data.Count - 1].transform.position += new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f);
+        arrows[arrows.Count - 1].transform.position += new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f);
 
         lastPos = lastPos + new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f) + new Vector3(obj1.transform.localScale.x, 0.0f, 0.0f);
         top = top + 1;
@@ -171,11 +165,31 @@ public class LinkedList : MonoBehaviour
     public void deletion()
     {
         if (top == -1) return;
+        if (lastSelectedNode != null) {
+            int index = getIndexOfGameObjectFromList(lastSelectedNode);
+            delete_at_index(index);
+            return;
+        }
         lastPos = lastPos - new Vector3(arrowprefab.transform.localScale.x, 0.0f, 0.0f) - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
         Destroy(data[top]);
         Destroy(arrows[top]);
         data.RemoveAt(top);
         arrows.RemoveAt(top);
+        top = top - 1;
+    }
+
+    private void delete_at_index(int index)
+    {
+        lastPos = lastPos - new Vector3(arrowprefab.transform.localScale.x, 0.0f, 0.0f) - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
+        for (int i = index; i < (data.Count - 1); i++)
+        {
+            data[i+1].transform.position = data[i].transform.position;
+            arrows[i+1].transform.position = arrows[i].transform.position;
+        }
+        Destroy(data[index]);
+        Destroy(arrows[index]);
+        data.RemoveAt(index);
+        arrows.RemoveAt(index);
         top = top - 1;
     }
 }
