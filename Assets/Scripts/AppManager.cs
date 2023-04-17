@@ -9,6 +9,7 @@ public enum AppStates {
     DS_STACK = 2,
     DS_LINKEDLIST = 3,
     DS_QUEUE = 4,
+    DS_PRIORITYQUEUE = 5,
 };
 
 public class AppManager : MonoBehaviour
@@ -20,6 +21,7 @@ public class AppManager : MonoBehaviour
     private GameObject DS_Stack;
     private GameObject DS_LinkedList;
     private GameObject DS_Queue;
+    private GameObject DS_PriorityQueue;
 
     public AppStates currentState;
 
@@ -33,10 +35,12 @@ public class AppManager : MonoBehaviour
         DS_Stack = DataStructures.transform.Find("Stack").gameObject;
         DS_LinkedList = DataStructures.transform.Find("LinkedList").gameObject;
         DS_Queue = DataStructures.transform.Find("Queue").gameObject;
+        DS_PriorityQueue = DataStructures.transform.Find("PriorityQueue").gameObject;
 
         DS_Stack.SetActive(false);
         DS_LinkedList.SetActive(false);
         DS_Queue.SetActive(false);
+        DS_PriorityQueue.SetActive(false);
 
         currentState = AppStates.BASE_PLACEMENT;
         backButton = GameObject.Find("BackButton").GetComponent<Button>();
@@ -78,6 +82,13 @@ public class AppManager : MonoBehaviour
         currentState = AppStates.DS_QUEUE;
     }
 
+    public void moveToPriorityQueue()
+    {
+        menuScreen.SetActive(false);
+        DS_PriorityQueue.SetActive(true);
+        currentState = AppStates.DS_PRIORITYQUEUE;
+    }
+
     public void goBack()
     {
         switch(currentState)
@@ -99,6 +110,12 @@ public class AppManager : MonoBehaviour
                 menuScreen.SetActive(true);
                 currentState = AppStates.DS_MENU;
                 DS_Queue.GetComponent<Queue>().reset();
+            break;
+            case AppStates.DS_PRIORITYQUEUE:
+                DS_PriorityQueue.SetActive(false);
+                menuScreen.SetActive(true);
+                currentState = AppStates.DS_MENU;
+                DS_PriorityQueue.GetComponent<PriorityQueue>().reset();
             break;
             case AppStates.DS_MENU:
                 menuScreen.SetActive(false);
