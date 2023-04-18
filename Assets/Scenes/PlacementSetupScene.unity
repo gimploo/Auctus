@@ -6935,7 +6935,7 @@ GameObject:
   - component: {fileID: 1409762442}
   - component: {fileID: 1409762441}
   m_Layer: 5
-  m_Name: InputField (TMP) (1)
+  m_Name: prioInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7026,7 +7026,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1699283730}
         m_TargetAssemblyTypeName: PriorityQueue, Assembly-CSharp
-        m_MethodName: updateInputText
+        m_MethodName: updatePrioInputText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7044,7 +7044,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1699283730}
         m_TargetAssemblyTypeName: PriorityQueue, Assembly-CSharp
-        m_MethodName: updateInputText
+        m_MethodName: updatePrioInputText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7059,7 +7059,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1699283730}
         m_TargetAssemblyTypeName: PriorityQueue, Assembly-CSharp
-        m_MethodName: updateInputText
+        m_MethodName: updatePrioInputText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7080,7 +7080,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1699283730}
         m_TargetAssemblyTypeName: PriorityQueue, Assembly-CSharp
-        m_MethodName: updateInputText
+        m_MethodName: updatePrioInputText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8452,8 +8452,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c86fcc262d32dd439fe02bb6d97167b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5206179932391708376, guid: f2463fe4c312fe846a17dca3b0fde0be, type: 3}
+  prefab: {fileID: 5206179932391708376, guid: d39cb94ffed162f4095e418e191e8e71, type: 3}
   cinputText: {fileID: 696060954}
+  prioInputText: {fileID: 1409762441}
 --- !u!1 &1736101117
 GameObject:
   m_ObjectHideFlags: 0
@@ -9811,7 +9812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 142, y: -108}
+  m_AnchoredPosition: {x: 135, y: -108}
   m_SizeDelta: {x: 117.9, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2078380699
