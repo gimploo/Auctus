@@ -11,6 +11,7 @@ public class LinkedList : MonoBehaviour
     [SerializeField] GameObject prefab;
     [SerializeField] GameObject arrowprefab;
     [SerializeField] TMP_InputField cinputText;
+    [SerializeField] GameObject memoryLayout;
 
     private string val = "";
     private int top = -1;
@@ -29,6 +30,7 @@ public class LinkedList : MonoBehaviour
     private void Awake()
     {
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
+        memoryLayout.SetActive(false);
     }
 
     private int getIndexOfGameObjectFromList(GameObject target)
