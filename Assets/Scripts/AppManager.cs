@@ -10,6 +10,8 @@ public enum AppStates {
     DS_LINKEDLIST = 3,
     DS_QUEUE = 4,
     DS_PRIORITYQUEUE = 5,
+    DS_LINKEDLIST_MEMORY_SCREEN = 6,
+    DS_DOUBLYLINKEDLIST = 7,
 };
 
 public class AppManager : MonoBehaviour
@@ -20,6 +22,7 @@ public class AppManager : MonoBehaviour
 
     private GameObject DS_Stack;
     private GameObject DS_LinkedList;
+    private GameObject DS_DoublyLinkedList;
     private GameObject DS_Queue;
     private GameObject DS_PriorityQueue;
 
@@ -34,6 +37,7 @@ public class AppManager : MonoBehaviour
 
         DS_Stack = DataStructures.transform.Find("Stack").gameObject;
         DS_LinkedList = DataStructures.transform.Find("LinkedList").gameObject;
+        DS_DoublyLinkedList = DataStructures.transform.Find("DoublyLinkedList").gameObject;
         DS_Queue = DataStructures.transform.Find("Queue").gameObject;
         DS_PriorityQueue = DataStructures.transform.Find("PriorityQueue").gameObject;
 
@@ -41,6 +45,7 @@ public class AppManager : MonoBehaviour
         DS_LinkedList.SetActive(false);
         DS_Queue.SetActive(false);
         DS_PriorityQueue.SetActive(false);
+        DS_DoublyLinkedList.SetActive(false);
 
         currentState = AppStates.BASE_PLACEMENT;
         backButton = GameObject.Find("BackButton").GetComponent<Button>();
@@ -75,6 +80,21 @@ public class AppManager : MonoBehaviour
         currentState = AppStates.DS_LINKEDLIST;
     }
 
+    public void moveToDoublyLinkedList()
+    {
+        menuScreen.SetActive(false);
+        DS_DoublyLinkedList.SetActive(true);
+        currentState = AppStates.DS_DOUBLYLINKEDLIST;
+    }
+
+    public void moveToLinkedListMemoryScreen()
+    {
+        DS_LinkedList.transform.GetChild(0).gameObject.SetActive(true);
+        DS_LinkedList.transform.GetChild(1).gameObject.SetActive(false);
+        DS_LinkedList.GetComponent<LinkedList>().UpdateMemoryLayout();
+        currentState = AppStates.DS_LINKEDLIST_MEMORY_SCREEN;
+    }
+
     public void moveToQueue()
     {
         menuScreen.SetActive(false);
@@ -104,6 +124,17 @@ public class AppManager : MonoBehaviour
                 menuScreen.SetActive(true);
                 currentState = AppStates.DS_MENU;
                 DS_LinkedList.GetComponent<LinkedList>().reset();
+            break;
+            case AppStates.DS_DOUBLYLINKEDLIST:
+                DS_DoublyLinkedList.SetActive(false);
+                menuScreen.SetActive(true);
+                currentState = AppStates.DS_MENU;
+                DS_DoublyLinkedList.GetComponent<DoublyLinkedList>().reset();
+            break;
+            case AppStates.DS_LINKEDLIST_MEMORY_SCREEN:
+                DS_LinkedList.transform.GetChild(0).gameObject.SetActive(false);
+                DS_LinkedList.transform.GetChild(1).gameObject.SetActive(true);
+                currentState = AppStates.DS_LINKEDLIST;
             break;
             case AppStates.DS_QUEUE:
                 DS_Queue.SetActive(false);

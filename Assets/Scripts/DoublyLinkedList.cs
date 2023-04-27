@@ -6,7 +6,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using TMPro;
 
-public class LinkedList : MonoBehaviour
+public class DoublyLinkedList : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
     [SerializeField] GameObject arrowprefab;
