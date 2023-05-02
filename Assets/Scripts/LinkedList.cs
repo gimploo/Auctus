@@ -121,9 +121,6 @@ public class LinkedList : MonoBehaviour
                 obj.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text;
             button.GetComponent<Image>().color = Color.blue;
 
-            Debug.Log(row_index);
-            Debug.Log(col_index);
-
             row_index++;
             col_index++;
 
@@ -141,7 +138,7 @@ public class LinkedList : MonoBehaviour
         );
         obj1.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text = val;
         GameObject obj2 = Instantiate(
-            arrowprefab, 
+            arrowprefab,
             arrows[index].transform.position,
             Quaternion.identity
         );
@@ -156,6 +153,7 @@ public class LinkedList : MonoBehaviour
             index,
             obj1
         );
+
         arrows.Insert(
             index,
             obj2
@@ -180,20 +178,23 @@ public class LinkedList : MonoBehaviour
             return;
         }
 
+        if (arrows.Count != 0) {
+            arrows[arrows.Count-1].SetActive(true);
+        }
+
         top = top + 1;
         GameObject obj1 = Instantiate(
             prefab, 
             lastPos,
             Quaternion.identity
         );
-
-        // sets the text
         obj1.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text = val;
         data.Insert(
             top,
             obj1
         );
         lastPos = lastPos + new Vector3(obj1.transform.localScale.x, 0.0f, 0.0f);
+
         GameObject obj2 = Instantiate(
             arrowprefab, 
             lastPos,
@@ -205,10 +206,10 @@ public class LinkedList : MonoBehaviour
         );
         lastPos = lastPos + new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f);
 
-        //clears input field
+        obj2.SetActive(false);
         cinputText.text = "";
-
         val = "";
+
     }
 
     public void deletion()

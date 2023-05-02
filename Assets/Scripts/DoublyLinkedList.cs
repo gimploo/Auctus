@@ -177,6 +177,10 @@ public class DoublyLinkedList : MonoBehaviour
             return;
         }
 
+        if (arrows.Count != 0) {
+            arrows[arrows.Count - 1].SetActive(true);
+        }
+
         top = top + 1;
         GameObject obj1 = Instantiate(
             prefab, 
@@ -202,9 +206,8 @@ public class DoublyLinkedList : MonoBehaviour
         );
         lastPos = lastPos + new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f);
 
-        //clears input field
+        obj2.SetActive(false);
         cinputText.text = "";
-
         val = "";
     }
 
