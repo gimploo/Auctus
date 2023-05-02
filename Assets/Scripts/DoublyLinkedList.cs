@@ -121,9 +121,6 @@ public class DoublyLinkedList : MonoBehaviour
                 obj.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text;
             button.GetComponent<Image>().color = Color.blue;
 
-            Debug.Log(row_index);
-            Debug.Log(col_index);
-
             row_index++;
             col_index++;
 
@@ -142,7 +139,7 @@ public class DoublyLinkedList : MonoBehaviour
         obj1.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text = val;
         GameObject obj2 = Instantiate(
             arrowprefab, 
-            arrows[index].transform.position,
+            arrows[index].transform.position + new Vector3(0.0f, -0.2f, 0.0f),
             Quaternion.identity
         );
 
