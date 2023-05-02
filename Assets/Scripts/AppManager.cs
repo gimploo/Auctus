@@ -12,6 +12,7 @@ public enum AppStates {
     DS_PRIORITYQUEUE = 5,
     DS_LINKEDLIST_MEMORY_SCREEN = 6,
     DS_DOUBLYLINKEDLIST = 7,
+    DS_CIRCULARQUEUE = 8,
 };
 
 public class AppManager : MonoBehaviour
@@ -24,6 +25,7 @@ public class AppManager : MonoBehaviour
     private GameObject DS_LinkedList;
     private GameObject DS_DoublyLinkedList;
     private GameObject DS_Queue;
+    private GameObject DS_CircularQueue;
     private GameObject DS_PriorityQueue;
 
     public AppStates currentState;
@@ -40,12 +42,14 @@ public class AppManager : MonoBehaviour
         DS_DoublyLinkedList = DataStructures.transform.Find("DoublyLinkedList").gameObject;
         DS_Queue = DataStructures.transform.Find("Queue").gameObject;
         DS_PriorityQueue = DataStructures.transform.Find("PriorityQueue").gameObject;
+        DS_CircularQueue = DataStructures.transform.Find("CircularQueue").gameObject;
 
         DS_Stack.SetActive(false);
         DS_LinkedList.SetActive(false);
         DS_Queue.SetActive(false);
         DS_PriorityQueue.SetActive(false);
         DS_DoublyLinkedList.SetActive(false);
+        DS_CircularQueue.SetActive(false);
 
         currentState = AppStates.BASE_PLACEMENT;
         backButton = GameObject.Find("BackButton").GetComponent<Button>();
@@ -102,6 +106,13 @@ public class AppManager : MonoBehaviour
         currentState = AppStates.DS_QUEUE;
     }
 
+    public void moveToCircularQueue()
+    {
+        menuScreen.SetActive(false);
+        DS_CircularQueue.SetActive(true);
+        currentState = AppStates.DS_CIRCULARQUEUE;
+    }
+
     public void moveToPriorityQueue()
     {
         menuScreen.SetActive(false);
@@ -141,6 +152,12 @@ public class AppManager : MonoBehaviour
                 menuScreen.SetActive(true);
                 currentState = AppStates.DS_MENU;
                 DS_Queue.GetComponent<Queue>().reset();
+            break;
+            case AppStates.DS_CIRCULARQUEUE:
+                DS_CircularQueue.SetActive(false);
+                menuScreen.SetActive(true);
+                currentState = AppStates.DS_MENU;
+                DS_CircularQueue.GetComponent<CircularQueue>().reset();
             break;
             case AppStates.DS_PRIORITYQUEUE:
                 DS_PriorityQueue.SetActive(false);
