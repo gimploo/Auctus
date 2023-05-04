@@ -29,7 +29,7 @@ public class CircularQueue : MonoBehaviour
 
     void Start()
     {
-        defaultPos = lastPos = AuctusBaseConfig.Instance.placementPose.position;
+        defaultPos = AuctusBaseConfig.Instance.placementPose.position;
         theta = 0.0f;
         radius = 0.2f;
     }
@@ -37,6 +37,7 @@ public class CircularQueue : MonoBehaviour
     public void enqueue()
     {
         if (val == "" || val == " " ) return;
+        if (data.Count == 9) return;
 
         top = top + 1;
         theta += 125.0f;
@@ -50,7 +51,6 @@ public class CircularQueue : MonoBehaviour
             top,
             newobj
         );
-        lastPos = lastPos + new Vector3(newobj.transform.localScale.x, 0.0f, 0.0f);
         val = cinputText.text = "";
     }
 
@@ -70,9 +70,6 @@ public class CircularQueue : MonoBehaviour
 
         Destroy(data[0]);
         data.RemoveAt(0);
-        lastPos = lastPos - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
-        for (int i = 0; i < data.Count; i++)
-            data[i].transform.position -= new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
         top = top - 1;
     }
 
