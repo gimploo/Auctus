@@ -30,7 +30,7 @@ public class LinkedList : MonoBehaviour
         val = cinputText.text;
     }
 
-    private void Awake()
+    void Start()
     {
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
         memoryLayout.SetActive(false);
@@ -60,6 +60,10 @@ public class LinkedList : MonoBehaviour
 
     void Update()
     {
+        if (top == -1) {
+            Start();
+        }
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -159,10 +163,11 @@ public class LinkedList : MonoBehaviour
             obj2
         );
 
-        data[data.Count - 1].transform.position += new Vector3(obj1.transform.localScale.x, 0.0f, 0.0f);
-        arrows[arrows.Count - 1].transform.position += new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f);
+        Vector3 dx = new Vector3(prefab.transform.localScale.x + arrowprefab.transform.localScale.x, 0.0f, 0.0f);
+        data[data.Count - 1].transform.position += dx;
+        arrows[arrows.Count - 1].transform.position += dx;
 
-        lastPos = lastPos + new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f) + new Vector3(obj1.transform.localScale.x, 0.0f, 0.0f);
+        lastPos = lastPos + dx;
         top = top + 1;
         cinputText.text = "";
         val = "";
@@ -225,6 +230,8 @@ public class LinkedList : MonoBehaviour
         Destroy(arrows[top]);
         data.RemoveAt(top);
         arrows.RemoveAt(top);
+
+        arrows[arrows.Count - 1].SetActive(false);
         top = top - 1;
     }
 
@@ -240,6 +247,8 @@ public class LinkedList : MonoBehaviour
         Destroy(arrows[index]);
         data.RemoveAt(index);
         arrows.RemoveAt(index);
+
+        arrows[arrows.Count - 1].SetActive(false);
         top = top - 1;
     }
 }

@@ -28,6 +28,14 @@ public class Stack : MonoBehaviour
         lastPos = AuctusBaseConfig.Instance.placementPose.position;
     }
 
+    void Update()
+    {
+        if (top == -1) {
+            Start();
+            return;
+        }
+    }
+
     public void push()
     {
         if (val == "" || val == " " ) return;
