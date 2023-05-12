@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum AppStates {
     BASE_PLACEMENT = 0,
@@ -21,6 +22,8 @@ public class AppManager : MonoBehaviour
     public GameObject placementScreen;
     public GameObject DataStructures;
 
+    public GameObject HelpScreen;
+
     private GameObject DS_Stack;
     private GameObject DS_LinkedList;
     private GameObject DS_DoublyLinkedList;
@@ -36,6 +39,7 @@ public class AppManager : MonoBehaviour
     {
         menuScreen.SetActive(false);
         placementScreen.SetActive(true);
+        HelpScreen.SetActive(false);
 
         DS_Stack = DataStructures.transform.Find("Stack").gameObject;
         DS_LinkedList = DataStructures.transform.Find("LinkedList").gameObject;
@@ -99,6 +103,53 @@ public class AppManager : MonoBehaviour
         currentState = AppStates.DS_LINKEDLIST_MEMORY_SCREEN;
     }
 
+    public void showHelp()
+    {
+        if (HelpScreen.activeSelf) {
+            HelpScreen.SetActive(false);
+            return;
+        } else {
+            HelpScreen.SetActive(true);
+        } 
+
+        GameObject HelperPrompt = HelpScreen.transform.GetChild(0).gameObject;
+        GameObject Description = HelpScreen.transform.GetChild(1).gameObject;
+
+        switch(currentState)
+        {
+            case AppStates.DS_STACK:
+                HelperPrompt.GetComponent<TMP_Text>().text = "Stack";
+                Description.GetComponent<TMP_Text>().text = "A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle. It is a collection of elements where the insertion and deletion of items can only occur at one end called the top. The basic operations that can be performed on a stack are push (adding an item to the top of the stack) and pop (removing an item from the top of the stack). Stacks are commonly used in computer programming and memory management, as well as in algorithms such as depth-first search and backtracking.";
+            break;
+            case AppStates.DS_LINKEDLIST:
+                HelperPrompt.GetComponent<TMP_Text>().text = "Singly Linked List";
+                Description.GetComponent<TMP_Text>().text = " A singly linked list is a linear data structure in computer science that consists of a sequence of nodes, where each node stores an element of data and a reference (or pointer) to the next node in the sequence. The first node is called the head of the list, and the last node's reference points to null, indicating the end of the list. Singly linked lists allow for efficient insertion and deletion of elements, but accessing a specific element in the list requires traversing the list from the head until the desired element is reached.  The following operations are performed on a Single Linked List:\n Insertion: The insertion operation can be performed in three ways. They are as follows…\n *Inserting At the Beginning of the list\n *Inserting At End of the list\n *Inserting At Specific location in the list\n Deletion: The deletion operation can be performed in three ways. They are as follows…\n *Deleting from the Beginning of the list\n *Deleting from the End of the list\n *Deleting a Specific Node\n Search: It is a process of determining and retrieving a specific node either from the front, the end or anywhere in the list.\n Display: This process displays the elements of a Single-linked list.";
+            break;
+            case AppStates.DS_DOUBLYLINKEDLIST:
+                HelperPrompt.GetComponent<TMP_Text>().text = "Doubly Linked List";
+                Description.GetComponent<TMP_Text>().text = " A doubly linked list is a linear data structure in computer science that consists of a sequence of nodes, where each node stores an element of data and references (or pointers) to the next and previous nodes in the sequence. The first node is called the head of the list, and the last node is called the tail. Doubly linked lists allow for efficient insertion and deletion of elements, as well as efficient traversal of the list in both forward and backward directions. However, they require more memory than singly linked lists due to the extra reference in each node.\n In a double-linked list, we perform the following operations:\n Insertion: The insertion operation can be performed in three ways as follows:\n *Inserting At the Beginning of the list\n *Inserting after a given node.\n *Inserting at the end.\n *Inserting before a given node\n Deletion: The deletion operation can be performed in three ways as follows…\n *Deleting from the Beginning of the list\n *Deleting from the End of the list\n *Deleting a Specific Node\n Display: This process displays the elements of a double-linked list.";
+            break;
+            case AppStates.DS_LINKEDLIST_MEMORY_SCREEN:
+                HelperPrompt.GetComponent<TMP_Text>().text = "Memory";
+                Description.GetComponent<TMP_Text>().text = "";
+            break;
+            case AppStates.DS_QUEUE:
+                HelperPrompt.GetComponent<TMP_Text>().text = "Queue";
+                Description.GetComponent<TMP_Text>().text = "A queue is a linear data structure in computer science that follows the First-In-First-Out (FIFO) principle. It is similar to a queue of people waiting in line, where the first person to join the line is the first to be served. A queue consists of a collection of elements where new elements are added at one end, called the rear or tail, and existing elements are removed from the other end, called the front or head. The basic operations that can be performed on a queue are enqueue (adding an element to the rear of the queue) and dequeue (removing an element from the front of the queue). Queues are commonly used in computer programming for tasks such as scheduling, buffering, and handling requests.";
+            break;
+            case AppStates.DS_CIRCULARQUEUE:
+                HelperPrompt.GetComponent<TMP_Text>().text = "Circular Queue";
+                Description.GetComponent<TMP_Text>().text = "A circular queue is a variation of a queue data structure in computer science where the last element in the queue is connected to the first element to create a circular arrangement. This allows for efficient use of space in memory and efficient processing of data in some applications. A circular queue consists of a fixed-size array and two pointers, one pointing to the front of the queue and one pointing to the rear of the queue. The basic operations that can be performed on a circular queue are enqueue (adding an element to the rear of the queue), dequeue (removing an element from the front of the queue), and peek (retrieving the element at the front of the queue without removing it). When the rear pointer reaches the end of the array, it wraps around to the beginning of the array to continue adding elements in a circular fashion. Similarly, when the front pointer reaches the end of the array, it wraps around to the beginning of the array to continue removing elements.";
+            break;
+            case AppStates.DS_PRIORITYQUEUE:
+                HelperPrompt.GetComponent<TMP_Text>().text = "Priority Queue";
+                Description.GetComponent<TMP_Text>().text = "A priority queue is a variation of a queue data structure in computer science where each element is assigned a priority value, and the element with the highest priority is dequeued first. Elements with the same priority are dequeued based on their order of arrival in the queue. Priority queues are typically implemented using a heap data structure, which allows for efficient insertion, removal, and retrieval of the highest priority element. The basic operations that can be performed on a priority queue include insertion (adding an element with a priority value), deletion (removing an element with the highest priority), and peeking (retrieving the element with the highest priority without removing it). Priority queues are commonly used in computer programming for tasks such as scheduling, event-driven simulations, and graph algorithms.";
+            break;
+            case AppStates.DS_MENU:
+            break;
+        }
+    }
+
     public void moveToQueue()
     {
         menuScreen.SetActive(false);
@@ -122,6 +173,11 @@ public class AppManager : MonoBehaviour
 
     public void goBack()
     {
+        if (HelpScreen.activeSelf) {
+            HelpScreen.SetActive(false);
+            return;
+        }
+
         switch(currentState)
         {
             case AppStates.DS_STACK:

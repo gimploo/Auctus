@@ -34,6 +34,7 @@ public class LinkedList : MonoBehaviour
     {
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
         memoryLayout.SetActive(false);
+        top = -1;
     }
 
     private int getIndexOfGameObjectFromList(GameObject target)
@@ -238,10 +239,10 @@ public class LinkedList : MonoBehaviour
     private void delete_at_index(int index)
     {
         lastPos = lastPos - new Vector3(arrowprefab.transform.localScale.x, 0.0f, 0.0f) - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
-        for (int i = index; i < (data.Count - 1); i++)
+        for (int i = (data.Count - 1); i > index; i--)
         {
-            data[i+1].transform.position = data[i].transform.position;
-            arrows[i+1].transform.position = arrows[i].transform.position;
+            data[i].transform.position = data[i-1].transform.position;
+            arrows[i].transform.position = arrows[i-1].transform.position;
         }
         Destroy(data[index]);
         Destroy(arrows[index]);
