@@ -113,7 +113,7 @@ public class AppManager : MonoBehaviour
         } 
 
         GameObject HelperPrompt = HelpScreen.transform.GetChild(0).gameObject;
-        GameObject Description = HelpScreen.transform.GetChild(1).gameObject;
+        GameObject Description = HelpScreen.transform.GetChild(1).transform.GetChild(0).transform.GetChild(1).gameObject;
 
         switch(currentState)
         {
