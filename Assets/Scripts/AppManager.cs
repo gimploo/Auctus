@@ -22,6 +22,7 @@ public class AppManager : MonoBehaviour
     public GameObject placementScreen;
     public GameObject DataStructures;
 
+    public GameObject PopUp;
     public GameObject HelpScreen;
 
     private GameObject DS_Stack;
@@ -54,6 +55,8 @@ public class AppManager : MonoBehaviour
         DS_PriorityQueue.SetActive(false);
         DS_DoublyLinkedList.SetActive(false);
         DS_CircularQueue.SetActive(false);
+
+        PopUp.SetActive(false);
 
         currentState = AppStates.BASE_PLACEMENT;
         backButton = GameObject.Find("BackButton").GetComponent<Button>();
@@ -131,7 +134,7 @@ public class AppManager : MonoBehaviour
             break;
             case AppStates.DS_LINKEDLIST_MEMORY_SCREEN:
                 HelperPrompt.GetComponent<TMP_Text>().text = "Memory";
-                Description.GetComponent<TMP_Text>().text = "";
+                Description.GetComponent<TMP_Text>().text = "Memory fragmentation in a linked list can occur when memory is allocated and deallocated for nodes in a non-contiguous manner, leading to inefficient memory utilization. There are two types of memory fragmentation that can affect linked lists: external fragmentation and internal fragmentation.";
             break;
             case AppStates.DS_QUEUE:
                 HelperPrompt.GetComponent<TMP_Text>().text = "Queue";
@@ -146,6 +149,12 @@ public class AppManager : MonoBehaviour
                 Description.GetComponent<TMP_Text>().text = "A priority queue is a variation of a queue data structure in computer science where each element is assigned a priority value, and the element with the highest priority is dequeued first. Elements with the same priority are dequeued based on their order of arrival in the queue. Priority queues are typically implemented using a heap data structure, which allows for efficient insertion, removal, and retrieval of the highest priority element. The basic operations that can be performed on a priority queue include insertion (adding an element with a priority value), deletion (removing an element with the highest priority), and peeking (retrieving the element with the highest priority without removing it). Priority queues are commonly used in computer programming for tasks such as scheduling, event-driven simulations, and graph algorithms.";
             break;
             case AppStates.DS_MENU:
+                HelperPrompt.GetComponent<TMP_Text>().text = "About Auctus";
+                Description.GetComponent<TMP_Text>().text = "Auctus is an augmented reality (AR) based computer science education app that is dedicated to teaching data structure implementation. It offers a unique and immersive learning experience by utilizing AR technology to visualize and explore various data structures.\nThe app is designed specifically for computer science students and enthusiasts who want to enhance their understanding and implementation skills in data structures. Auctus utilizes AR to bring these abstract concepts to life by overlaying virtual objects and visualizations onto the real world, making it easier for users to grasp the intricacies of implementing different data structures.\nThrough Auctus, users can interact with three-dimensional representations of popular data structures such as arrays, linked lists, stacks and queues. They can manipulate these structures, observe their behavior, and gain practical experience in implementing them. The AR environment allows users to visualize the inner workings of data structures, understand their relationships, and explore how they store and organize data.";
+            break;
+            case AppStates.BASE_PLACEMENT:
+                HelperPrompt.GetComponent<TMP_Text>().text = "About Auctus";
+                Description.GetComponent<TMP_Text>().text = "Auctus is an augmented reality (AR) based computer science education app that is dedicated to teaching data structure implementation. It offers a unique and immersive learning experience by utilizing AR technology to visualize and explore various data structures.\nThe app is designed specifically for computer science students and enthusiasts who want to enhance their understanding and implementation skills in data structures. Auctus utilizes AR to bring these abstract concepts to life by overlaying virtual objects and visualizations onto the real world, making it easier for users to grasp the intricacies of implementing different data structures.\nThrough Auctus, users can interact with three-dimensional representations of popular data structures such as arrays, linked lists, stacks and queues. They can manipulate these structures, observe their behavior, and gain practical experience in implementing them. The AR environment allows users to visualize the inner workings of data structures, understand their relationships, and explore how they store and organize data.";
             break;
         }
     }
