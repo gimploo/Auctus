@@ -11,6 +11,7 @@ public class CircularQueue : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
     [SerializeField] TMP_InputField cinputText;
+    [SerializeField] GameObject PopUp;
 
     private string val = "";
     private int top = -1;
@@ -36,7 +37,10 @@ public class CircularQueue : MonoBehaviour
 
     public void enqueue()
     {
-        if (val == "" || val == " " ) return;
+        if (val == "" || val == " " ) {
+            PopUp.SetActive(true);
+            return;
+        }
         if (data.Count == 9) return;
 
         top = top + 1;

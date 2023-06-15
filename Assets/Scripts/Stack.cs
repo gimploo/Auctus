@@ -10,6 +10,7 @@ using TMPro;
 public class Stack : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
+    [SerializeField] GameObject PopUp;
     [SerializeField] TMP_InputField cinputText;
 
     private string val = "";
@@ -38,7 +39,10 @@ public class Stack : MonoBehaviour
 
     public void push()
     {
-        if (val == "" || val == " " ) return;
+        if (val == "" || val == " " ) {
+            PopUp.SetActive(true);
+            return;
+        }
 
         top = top + 1;
         GameObject newobj = Instantiate(

@@ -10,6 +10,7 @@ using TMPro;
 public class Queue : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
+    [SerializeField] GameObject PopUp;
     [SerializeField] TMP_InputField cinputText;
 
     private string val = "";
@@ -30,7 +31,10 @@ public class Queue : MonoBehaviour
 
     public void enqueue()
     {
-        if (val == "" || val == " " ) return;
+        if (val == "" || val == " " ) {
+            PopUp.SetActive(true);
+            return;
+        }
 
         top = top + 1;
         GameObject newobj = Instantiate(prefab, lastPos, Quaternion.identity);

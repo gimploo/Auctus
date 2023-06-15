@@ -10,6 +10,7 @@ using TMPro;
 public class PriorityQueue : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
+    [SerializeField] GameObject PopUp;
     [SerializeField] TMP_InputField cinputText;
     [SerializeField] TMP_InputField prioInputText;
 
@@ -74,7 +75,10 @@ public class PriorityQueue : MonoBehaviour
 
     public void enqueue()
     {
-        if (val == "" || val == " " || prio == " " || prio == "" || !IsDigitsOnly(prio)) return;
+        if (val == "" || val == " " || prio == " " || prio == "" || !IsDigitsOnly(prio)) {
+            PopUp.SetActive(true);
+            return;
+        }
 
         top = top + 1;
         GameObject newobj = Instantiate(prefab, lastPos, Quaternion.identity);

@@ -237,4 +237,9 @@ public class AppManager : MonoBehaviour
             break;
         }
     }
+
+    public void closePopUp()
+    {
+        PopUp.SetActive(false);
+    }
 }

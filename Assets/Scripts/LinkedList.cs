@@ -12,6 +12,7 @@ public class LinkedList : MonoBehaviour
     [SerializeField] GameObject arrowprefab;
     [SerializeField] TMP_InputField cinputText;
     [SerializeField] GameObject memoryLayout;
+    [SerializeField] GameObject PopUp;
 
     private string val = "";
     private int top = -1;
@@ -176,7 +177,10 @@ public class LinkedList : MonoBehaviour
 
     public void insertion()
     {
-        if (val == "" || val == " " ) return;
+        if (val == "" || val == " " ) {
+            PopUp.SetActive(true);
+            return;
+        }
 
         if (lastSelectedNode != null) {
             int index = getIndexOfGameObjectFromList(lastSelectedNode);
