@@ -13,6 +13,7 @@ public class LinkedList : MonoBehaviour
     [SerializeField] TMP_InputField cinputText;
     [SerializeField] GameObject memoryLayout;
     [SerializeField] GameObject PopUp;
+    [SerializeField] GameObject InsertHelperPrompt;
 
     private string val = "";
     private int top = -1;
@@ -25,6 +26,9 @@ public class LinkedList : MonoBehaviour
     private int MAXROWS = 5;
 
     private GameObject lastSelectedNode = null;
+    private GameObject tutorialObject;
+
+    private float arrow_width;
 
     public void updateInputText()
     {
@@ -36,6 +40,8 @@ public class LinkedList : MonoBehaviour
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
         memoryLayout.SetActive(false);
         top = -1;
+        arrow_width = arrowprefab.transform.localScale.x + 0.01f;
+        InsertHelperPrompt.SetActive(false);
     }
 
     private int getIndexOfGameObjectFromList(GameObject target)
@@ -58,12 +64,22 @@ public class LinkedList : MonoBehaviour
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
         top = -1;
         val = "";
+
+        InsertHelperPrompt.SetActive(false);
+
+        Destroy(tutorialObject);
     }
 
     void Update()
     {
         if (top == -1) {
             Start();
+        }
+
+        if (top == 1) {
+            InsertHelperPrompt.SetActive(true);
+        } else {
+            InsertHelperPrompt.SetActive(false);
         }
 
         if (Input.touchCount > 0)
@@ -97,7 +113,6 @@ public class LinkedList : MonoBehaviour
     public void UpdateMemoryLayout()
     {
         //TODO: find a better way to do this
-        if (data.Count == 0) return; 
 
         GameObject[] rows = {
             memoryLayout.transform.GetChild(0).gameObject,
@@ -116,6 +131,8 @@ public class LinkedList : MonoBehaviour
         //         button.GetComponentInChildren<TMP_Text>().text = "0";
         //     }
         // }
+
+        if (data.Count == 0) return; 
 
         int row_index = 0;
         int col_index = 0;
@@ -165,7 +182,7 @@ public class LinkedList : MonoBehaviour
             obj2
         );
 
-        Vector3 dx = new Vector3(prefab.transform.localScale.x + arrowprefab.transform.localScale.x, 0.0f, 0.0f);
+        Vector3 dx = new Vector3(prefab.transform.localScale.x + arrowprefab.transform.localScale.x + arrow_width, 0.0f, 0.0f);
         data[data.Count - 1].transform.position += dx;
         arrows[arrows.Count - 1].transform.position += dx;
 
@@ -214,7 +231,7 @@ public class LinkedList : MonoBehaviour
             top,
             obj2
         );
-        lastPos = lastPos + new Vector3(obj2.transform.localScale.x, 0.0f, 0.0f);
+        lastPos = lastPos + new Vector3(obj2.transform.localScale.x + arrow_width, 0.0f, 0.0f);
 
         obj2.SetActive(false);
         cinputText.text = "";
@@ -230,7 +247,7 @@ public class LinkedList : MonoBehaviour
             delete_at_index(index);
             return;
         }
-        lastPos = lastPos - new Vector3(arrowprefab.transform.localScale.x, 0.0f, 0.0f) - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
+        lastPos = lastPos - new Vector3(arrowprefab.transform.localScale.x + arrow_width, 0.0f, 0.0f) - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
         Destroy(data[top]);
         Destroy(arrows[top]);
         data.RemoveAt(top);
@@ -242,7 +259,7 @@ public class LinkedList : MonoBehaviour
 
     private void delete_at_index(int index)
     {
-        lastPos = lastPos - new Vector3(arrowprefab.transform.localScale.x, 0.0f, 0.0f) - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
+        lastPos = lastPos - new Vector3(arrowprefab.transform.localScale.x + arrow_width, 0.0f, 0.0f) - new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
         for (int i = (data.Count - 1); i > index; i--)
         {
             data[i].transform.position = data[i-1].transform.position;

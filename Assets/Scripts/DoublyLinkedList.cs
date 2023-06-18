@@ -13,7 +13,7 @@ public class DoublyLinkedList : MonoBehaviour
     [SerializeField] TMP_InputField cinputText;
     [SerializeField] GameObject memoryLayout;
     [SerializeField] GameObject PopUp;
-
+    [SerializeField] GameObject InsertHelperPrompt;
 
     private string val = "";
     private int top = -1;
@@ -36,6 +36,7 @@ public class DoublyLinkedList : MonoBehaviour
     {
         lastPos = AuctusBaseConfig.Instance.placementPose.position + new Vector3(0.0f, prefab.transform.localScale.y, 0.0f);
         memoryLayout.SetActive(false);
+        InsertHelperPrompt.SetActive(false);
     }
 
     private int getIndexOfGameObjectFromList(GameObject target)
@@ -59,12 +60,20 @@ public class DoublyLinkedList : MonoBehaviour
         lastSelectedNode = null;
         top = -1;
         val = "";
+
+        InsertHelperPrompt.SetActive(false);
     }
 
     void Update()
     {
         if (top == -1) {
             Start();
+        }
+        
+        if (top == 1) {
+            InsertHelperPrompt.SetActive(true);
+        } else {
+            InsertHelperPrompt.SetActive(false);
         }
 
         if (Input.touchCount > 0)
@@ -98,7 +107,6 @@ public class DoublyLinkedList : MonoBehaviour
     public void UpdateMemoryLayout()
     {
         //TODO: find a better way to do this
-        if (data.Count == 0) return; 
 
         GameObject[] rows = {
             memoryLayout.transform.GetChild(0).gameObject,
@@ -117,6 +125,8 @@ public class DoublyLinkedList : MonoBehaviour
         //         button.GetComponentInChildren<TMP_Text>().text = "0";
         //     }
         // }
+
+        if (data.Count == 0) return; 
 
         int row_index = 0;
         int col_index = 0;
@@ -146,7 +156,7 @@ public class DoublyLinkedList : MonoBehaviour
         obj1.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<TMP_Text>().text = val;
         GameObject obj2 = Instantiate(
             arrowprefab, 
-            arrows[index].transform.position + new Vector3(0.0f, -0.2f, 0.0f),
+            arrows[index].transform.position,
             Quaternion.identity
         );
 
@@ -206,7 +216,7 @@ public class DoublyLinkedList : MonoBehaviour
             top,
             obj1
         );
-        lastPos = lastPos + new Vector3(obj1.transform.localScale.x, 0.0f, 0.0f);
+        lastPos = lastPos + new Vector3(prefab.transform.localScale.x, 0.0f, 0.0f);
         GameObject obj2 = Instantiate(
             arrowprefab, 
             lastPos,

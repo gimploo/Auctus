@@ -14,6 +14,7 @@ public enum AppStates {
     DS_LINKEDLIST_MEMORY_SCREEN = 6,
     DS_DOUBLYLINKEDLIST = 7,
     DS_CIRCULARQUEUE = 8,
+    DS_DOUBLYLINKEDLIST_MEMORY_SCREEN = 9,
 };
 
 public class AppManager : MonoBehaviour
@@ -106,6 +107,14 @@ public class AppManager : MonoBehaviour
         currentState = AppStates.DS_LINKEDLIST_MEMORY_SCREEN;
     }
 
+    public void moveToDoublyLinkedListMemoryScreen()
+    {
+        DS_DoublyLinkedList.transform.GetChild(0).gameObject.SetActive(true);
+        DS_DoublyLinkedList.transform.GetChild(1).gameObject.SetActive(false);
+        DS_DoublyLinkedList.GetComponent<DoublyLinkedList>().UpdateMemoryLayout();
+        currentState = AppStates.DS_DOUBLYLINKEDLIST_MEMORY_SCREEN;
+    }
+
     public void showHelp()
     {
         if (HelpScreen.activeSelf) {
@@ -132,6 +141,7 @@ public class AppManager : MonoBehaviour
                 HelperPrompt.GetComponent<TMP_Text>().text = "Doubly Linked List";
                 Description.GetComponent<TMP_Text>().text = " A doubly linked list is a linear data structure in computer science that consists of a sequence of nodes, where each node stores an element of data and references (or pointers) to the next and previous nodes in the sequence. The first node is called the head of the list, and the last node is called the tail. Doubly linked lists allow for efficient insertion and deletion of elements, as well as efficient traversal of the list in both forward and backward directions. However, they require more memory than singly linked lists due to the extra reference in each node.\n In a double-linked list, we perform the following operations:\n Insertion: The insertion operation can be performed in three ways as follows:\n *Inserting At the Beginning of the list\n *Inserting after a given node.\n *Inserting at the end.\n *Inserting before a given node\n Deletion: The deletion operation can be performed in three ways as follows…\n *Deleting from the Beginning of the list\n *Deleting from the End of the list\n *Deleting a Specific Node\n Display: This process displays the elements of a double-linked list.";
             break;
+            case AppStates.DS_DOUBLYLINKEDLIST_MEMORY_SCREEN:
             case AppStates.DS_LINKEDLIST_MEMORY_SCREEN:
                 HelperPrompt.GetComponent<TMP_Text>().text = "Memory";
                 Description.GetComponent<TMP_Text>().text = "Memory fragmentation in a linked list can occur when memory is allocated and deallocated for nodes in a non-contiguous manner, leading to inefficient memory utilization. There are two types of memory fragmentation that can affect linked lists: external fragmentation and internal fragmentation.";
@@ -153,8 +163,8 @@ public class AppManager : MonoBehaviour
                 Description.GetComponent<TMP_Text>().text = "Auctus is an augmented reality (AR) based computer science education app that is dedicated to teaching data structure implementation. It offers a unique and immersive learning experience by utilizing AR technology to visualize and explore various data structures.\nThe app is designed specifically for computer science students and enthusiasts who want to enhance their understanding and implementation skills in data structures. Auctus utilizes AR to bring these abstract concepts to life by overlaying virtual objects and visualizations onto the real world, making it easier for users to grasp the intricacies of implementing different data structures.\nThrough Auctus, users can interact with three-dimensional representations of popular data structures such as arrays, linked lists, stacks and queues. They can manipulate these structures, observe their behavior, and gain practical experience in implementing them. The AR environment allows users to visualize the inner workings of data structures, understand their relationships, and explore how they store and organize data.";
             break;
             case AppStates.BASE_PLACEMENT:
-                HelperPrompt.GetComponent<TMP_Text>().text = "About Auctus";
-                Description.GetComponent<TMP_Text>().text = "Auctus is an augmented reality (AR) based computer science education app that is dedicated to teaching data structure implementation. It offers a unique and immersive learning experience by utilizing AR technology to visualize and explore various data structures.\nThe app is designed specifically for computer science students and enthusiasts who want to enhance their understanding and implementation skills in data structures. Auctus utilizes AR to bring these abstract concepts to life by overlaying virtual objects and visualizations onto the real world, making it easier for users to grasp the intricacies of implementing different data structures.\nThrough Auctus, users can interact with three-dimensional representations of popular data structures such as arrays, linked lists, stacks and queues. They can manipulate these structures, observe their behavior, and gain practical experience in implementing them. The AR environment allows users to visualize the inner workings of data structures, understand their relationships, and explore how they store and organize data.";
+                HelperPrompt.GetComponent<TMP_Text>().text = "Base setup";
+                Description.GetComponent<TMP_Text>().text = "Move your phone around for it detect a flat surface";
             break;
         }
     }
@@ -211,6 +221,11 @@ public class AppManager : MonoBehaviour
                 DS_LinkedList.transform.GetChild(0).gameObject.SetActive(false);
                 DS_LinkedList.transform.GetChild(1).gameObject.SetActive(true);
                 currentState = AppStates.DS_LINKEDLIST;
+            break;
+            case AppStates.DS_DOUBLYLINKEDLIST_MEMORY_SCREEN:
+                DS_DoublyLinkedList.transform.GetChild(0).gameObject.SetActive(false);
+                DS_DoublyLinkedList.transform.GetChild(1).gameObject.SetActive(true);
+                currentState = AppStates.DS_DOUBLYLINKEDLIST;
             break;
             case AppStates.DS_QUEUE:
                 DS_Queue.SetActive(false);
